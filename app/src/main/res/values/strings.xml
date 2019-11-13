@@ -29,6 +29,15 @@
     <string name="toast_email_sent">Email sent successfully!</string>
     <string name="return_button">Return</string>
 
+    <!-- Strings related to Home -->
+    <string name="day">D A Y\n 0 1</string>
+    <string name="add_new_entry">New Entry</string>
+    <string name="view_stats">Stats</string>
+    <string name="view_calendar">Calendar</string>
+    <string name="view_search">Search Entries</string>
+    <string name="menu_welcome">Welcome</string>
+    <string name="sign_out">Log Out</string>
+
     <!-- String related to Settings -->
     <string name="change_notification_time">Change Notification Time</string>
     <string name="save_notification_time">Save Notification Time</string>
@@ -43,4 +52,18 @@
     <string name="change_password">Change Password</string>
     <string name="change_notif_freq">Change Notification Frequency</string>
     <string name="change_notif_time">Change Notification Time</string>
+
+    <!-- Strings related to the Calendar -->
+    <string name="calendar_vew_label">Select a Date to View Entries</string>
+    <string name="title_activity_change_password">ChangePasswordActivity</string>
+    <string name="title_activity_notification_time_setting">NotificationTimeSettingActivity</string>
+
+    <!-- Strings related to Search -->
+    <string name="search_text">Enter a word or phrase to search:</string>
+    <string name="search_button">Search</string>
+    <string name="no_search_results">We couldn\'t find any entries that contained your search word(s). Please try again.</string>
+    <string name="datetime">Date and Time: </string>
+    <string name="mood_rating">Mood: </string>
+    <string name="message">Message: </string>
+    <string name="tags_string">Tags: </string>
 </resources>

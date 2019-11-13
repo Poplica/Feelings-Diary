@@ -64,6 +64,16 @@
     <string name="tags">Enter any tags separated by commas here:</string>
     <string name="message_text">Message:</string>
 
+    <!-- Strings related to View -->
+    <string name="diary_entry_label">Diary Entry</string>
+    <string name="diary_entry_date">Date:</string>
+    <string name="diary_entry_location">Location:</string>
+    <string name="diary_entry_Mood">Mood:</string>
+    <string name="diary_entry_thoughts">Thoughts:</string>
+    <string name="delete_diary_entry">Delete Entry</string>
+    <string name="delete_prompt">Are you sure you want to delete this diary Entry?</string>
+    <string name="yes_delete">Yes</string>
+
     <!-- Strings related to the Calendar -->
     <string name="calendar_vew_label">Select a Date to View Entries</string>
     <string name="title_activity_change_password">ChangePasswordActivity</string>

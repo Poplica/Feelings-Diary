@@ -53,6 +53,17 @@
     <string name="change_notif_freq">Change Notification Frequency</string>
     <string name="change_notif_time">Change Notification Time</string>
 
+    <!-- Strings related to Create -->
+    <string name="title_activity_entry_creation">EntryCreation</string>
+    <string name="title_home">Home</string>
+    <string name="title_dashboard">Dashboard</string>
+    <string name="title_notifications">Notifications</string>
+    <string name="text">How are you doing today?</string>
+    <string name="hint">Today, I…</string>
+    <string name="submit">Submit</string>
+    <string name="tags">Enter any tags separated by commas here:</string>
+    <string name="message_text">Message:</string>
+
     <!-- Strings related to the Calendar -->
     <string name="calendar_vew_label">Select a Date to View Entries</string>
     <string name="title_activity_change_password">ChangePasswordActivity</string>

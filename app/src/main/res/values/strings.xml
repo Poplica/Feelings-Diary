@@ -28,4 +28,19 @@
     <string name="error_bad_email">There is no account associated with this email.</string>
     <string name="toast_email_sent">Email sent successfully!</string>
     <string name="return_button">Return</string>
+
+    <!-- String related to Settings -->
+    <string name="change_notification_time">Change Notification Time</string>
+    <string name="save_notification_time">Save Notification Time</string>
+    <string name="change_notification_frequency">Change Notification Frequency</string>
+    <string name="frequency_daily">Daily</string>
+    <string name="frequency_few_days">Few Days</string>
+    <string name="frequency_weekly">Weekly</string>
+    <string name="frequency_never">Never</string>
+    <string name="save_notification_frequency">Save Notification Frequency</string>
+    <string name="restart_app">You must restart the app for this change to go into effect.</string>
+    <string name="saved">Saved!</string>
+    <string name="change_password">Change Password</string>
+    <string name="change_notif_freq">Change Notification Frequency</string>
+    <string name="change_notif_time">Change Notification Time</string>
 </resources>

@@ -8,6 +8,7 @@ android:layout_height="match_parent"
 tools:context=".HomeActivity">
 
 <!-- https://github.com/sayyam/carouselview -->
+<!-- TODO: possibly change this to something better -->
 <com.synnapps.carouselview.CarouselView
     android:id="@+id/carouselView"
     android:layout_width="match_parent"

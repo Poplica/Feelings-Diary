@@ -22,4 +22,10 @@
     <string name="prompt_confirm_password">Confirm Password</string>
     <string name="error_passwords_dont_match">Passwords must match.</string>
     <string name="error_invalid_email">Please enter a valid email.</string>
+
+    <!-- Strings related to password reset -->
+    <string name="button_reset_password">Reset Password</string>
+    <string name="error_bad_email">There is no account associated with this email.</string>
+    <string name="toast_email_sent">Email sent successfully!</string>
+    <string name="return_button">Return</string>
 </resources>

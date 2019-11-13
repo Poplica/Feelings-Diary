@@ -14,4 +14,12 @@
     <string name="sign_up_text_field">Don\'t have an account? Sign up <u>here</u>.</string>
     <string name="action_sign_up">Sign Up</string>
     <string name="forgot_password"><u>Forgot your password?</u></string>
+
+    <!-- Strings related to sign up -->
+    <string name="title_activity_sign_up">Sign up</string>
+    <string name="cancel">Cancel</string>
+    <string name="error_existing_email">This email already exists.</string>
+    <string name="prompt_confirm_password">Confirm Password</string>
+    <string name="error_passwords_dont_match">Passwords must match.</string>
+    <string name="error_invalid_email">Please enter a valid email.</string>
 </resources>

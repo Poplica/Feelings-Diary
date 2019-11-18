@@ -30,7 +30,7 @@
     <string name="return_button">Return</string>
 
     <!-- Strings related to Home -->
-    <string name="day">D A Y\n 0 1</string>
+    <string name="day">D\nA\nY\n0\n1</string>
     <string name="add_new_entry">New Entry</string>
     <string name="view_stats">Stats</string>
     <string name="view_calendar">Calendar</string>

@@ -1,7 +1,7 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
 xmlns:tools="http://schemas.android.com/tools"
 xmlns:app="http://schemas.android.com/apk/res-auto"
-android:background="@drawable/ic_launcher_background"
+android:background="@drawable/background_home"
 android:orientation="vertical"
 android:layout_width="match_parent"
 android:layout_height="match_parent"
@@ -30,8 +30,9 @@ tools:context=".HomeActivity">
         android:id="@+id/green_back"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
-        android:src="@drawable/ic_launcher_foreground"/>
+        android:paddingLeft="280dp"
+        android:layout_gravity="end"
+        android:src="@drawable/background_date"/>
 
     <TextView
         android:id="@+id/myImageViewText"
@@ -41,11 +42,12 @@ tools:context=".HomeActivity">
         android:layout_alignTop="@id/green_back"
         android:layout_alignRight="@id/green_back"
         android:layout_alignBottom="@id/green_back"
+        android:paddingRight="15dp"
         android:layout_margin="1dp"
-        android:gravity="center"
+        android:gravity="end"
         android:text="@string/day"
-        android:textSize="48sp"
-        android:textColor="@color/white" />
+        android:textSize="32sp"
+        android:textColor="@color/black" />
 </RelativeLayout>
 
 <LinearLayout
@@ -59,37 +61,37 @@ tools:context=".HomeActivity">
     <ImageButton
         android:id="@+id/add_entry_button"
         android:contentDescription="@string/add_new_entry"
-        android:layout_width="62dp"
-        android:layout_height="62dp"
-        android:layout_margin="16dp"
+        android:layout_width="6dp"
+        android:layout_height="42dp"
+        android:layout_margin="8dp"
         android:layout_weight="1"
-        android:background="@drawable/ic_launcher_foreground"/>
+        android:background="@drawable/create_entry"/>
 
     <ImageButton
         android:id="@+id/graph_button"
         android:contentDescription="@string/view_stats"
-        android:layout_width="62dp"
-        android:layout_height="62dp"
-        android:layout_margin="16dp"
+        android:layout_width="6dp"
+        android:layout_height="42dp"
+        android:layout_margin="8dp"
         android:layout_weight="1"
-        android:background="@drawable/ic_launcher_foreground" />
+        android:background="@drawable/graph" />
 
     <ImageButton
         android:id="@+id/calendar_button"
         android:contentDescription="@string/calendar_vew_label"
-        android:layout_width="62dp"
-        android:layout_height="62dp"
-        android:layout_margin="16dp"
+        android:layout_width="6dp"
+        android:layout_height="42dp"
+        android:layout_margin="8dp"
         android:layout_weight="1"
-        android:background="@drawable/ic_launcher_foreground" />
+        android:background="@drawable/calendar" />
 
     <ImageButton
         android:id="@+id/search_button"
         android:contentDescription="@string/search_button"
-        android:layout_width="62dp"
-        android:layout_height="62dp"
-        android:layout_margin="16dp"
+        android:layout_width="6dp"
+        android:layout_height="42dp"
+        android:layout_margin="8dp"
         android:layout_weight="1"
-        android:background="@drawable/ic_launcher_foreground"/>
+        android:background="@drawable/search"/>
 </LinearLayout>
 </RelativeLayout>

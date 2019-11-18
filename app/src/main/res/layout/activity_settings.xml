@@ -4,7 +4,7 @@
     android:id="@+id/activity_settings"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/ic_launcher_background"
+    android:background="@drawable/background_generic"
     android:orientation="vertical"
     android:layout_centerVertical="true"
     android:gravity="center"
@@ -18,7 +18,7 @@
         android:layout_marginBottom="16dp"
         android:background="@color/colorPrimaryDark"
         android:text="@string/change_password"
-        android:textColor="@color/white"
+        android:textColor="@color/colorPrimary"
         android:textStyle="bold"/>
 
     <Button
@@ -30,7 +30,7 @@
         android:layout_marginBottom="16dp"
         android:background="@color/colorPrimaryDark"
         android:text="@string/change_notif_freq"
-        android:textColor="@color/white"
+        android:textColor="@color/colorPrimary"
         android:textStyle="bold"/>
 
     <Button
@@ -41,6 +41,6 @@
         android:layout_below="@id/change_frequency_button"
         android:background="@color/colorPrimaryDark"
         android:text="@string/change_notification_time"
-        android:textColor="@color/white"
+        android:textColor="@color/colorPrimary"
         android:textStyle="bold"/>
 </RelativeLayout>

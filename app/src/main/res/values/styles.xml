@@ -24,7 +24,7 @@
 
     <!-- TODO change colors -->
     <style name="CalenderViewCustom" parent="Theme.AppCompat">
-        <item name="colorAccent">@color/colorAccent</item>
-        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorAccent">@color/colorPrimary</item>
+        <item name="colorPrimary">@color/colorPrimaryDark</item>
     </style>
 </resources>

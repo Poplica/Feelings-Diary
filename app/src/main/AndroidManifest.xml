@@ -9,19 +9,29 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".ViewEntryActivity"></activity>
+        <activity android:name=".ViewEntryActivity"/>
         <activity android:name=".SearchActivity" />
         <activity android:name=".CalendarActivity" />
         <activity android:name=".GraphActivity" />
         <activity android:name=".CreateEntryActivity" />
-        <activity android:name=".NotificationTimeActivity" />
+        <activity
+            android:name=".NotificationTimeActivity"
+            android:theme="@style/AppTheme.NoActionBar"/>
         <activity android:name=".NotificationFrequencyActivity" />
         <activity android:name=".SettingsActivity" />
         <activity android:name=".HomeActivity" />
-        <activity android:name=".ChangePasswordActivity" />
-        <activity android:name=".ForgotPasswordActivity" />
-        <activity android:name=".SignUpActivity" />
-        <activity android:name=".LoginActivity">
+        <activity
+            android:name=".ChangePasswordActivity"
+            android:theme="@style/AppTheme.NoActionBar"/>
+        <activity
+            android:name=".ForgotPasswordActivity"
+            android:theme="@style/AppTheme.NoActionBar"/>
+        <activity
+            android:name=".SignUpActivity"
+            android:theme="@style/AppTheme.NoActionBar"/>
+        <activity
+            android:name=".LoginActivity"
+            android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

@@ -39,6 +39,7 @@
     <string name="sign_out">Log Out</string>
 
     <!-- String related to Settings -->
+    <string name = "settings">Settings</string>
     <string name="change_notification_time">Change Notification Time</string>
     <string name="save_notification_time">Save Notification Time</string>
     <string name="change_notification_frequency">Change Notification Frequency</string>

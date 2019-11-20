@@ -9,28 +9,33 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".ViewEntryActivity"/>
+        <receiver
+            android:name=".NotificationReceiver"
+            android:enabled="true"
+            android:exported="true"></receiver>
+
+        <activity android:name=".ViewEntryActivity" />
         <activity android:name=".SearchActivity" />
         <activity android:name=".CalendarActivity" />
         <activity android:name=".GraphActivity" />
         <activity android:name=".CreateEntryActivity" />
         <activity
             android:name=".NotificationTimeActivity"
-            android:theme="@style/AppTheme.NoActionBar"/>
+            android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".NotificationFrequencyActivity"
-            android:theme="@style/AppTheme.NoActionBar"/>
-        <activity android:name=".SettingsActivity" />
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity android:name=".SettingsActivity"/>
         <activity android:name=".HomeActivity" />
         <activity
             android:name=".ChangePasswordActivity"
-            android:theme="@style/AppTheme.NoActionBar"/>
+            android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".ForgotPasswordActivity"
-            android:theme="@style/AppTheme.NoActionBar"/>
+            android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".SignUpActivity"
-            android:theme="@style/AppTheme.NoActionBar"/>
+            android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".LoginActivity"
             android:theme="@style/AppTheme.NoActionBar">

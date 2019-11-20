@@ -6,6 +6,8 @@ import android.content.Context
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.Menu
+import android.view.MenuItem
 
 private const val MIDNIGHT: Long = 43200000
 
@@ -42,6 +44,27 @@ class HomeActivity : AppCompatActivity() {
                 AlarmManager.INTERVAL_DAY,
                 pendingIntent
             )
+        }
+    }
+
+    //Creates a menu in the toolbar
+    override fun onCreateOptionsMenu(menu: Menu): Boolean {
+        if (super.onCreateOptionsMenu(menu)) {
+            menuInflater.inflate(R.menu.main_menu, menu)
+            return true
+        }
+        return false
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        when (item.itemId) {
+            R.id.settings_menu -> {
+                startActivity(Intent(this@HomeActivity, SettingsActivity::class.java))
+                return true
+            }
+            // TODO - Sign out of firebase when logout menu option is selected
+            R.id.logout_menu -> return true
+            else -> return super.onOptionsItemSelected(item)
         }
     }
 }

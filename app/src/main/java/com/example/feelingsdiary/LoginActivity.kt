@@ -14,7 +14,6 @@ import com.google.firebase.auth.FirebaseAuth
 class LoginActivity : AppCompatActivity() {
     private var viewEmail: TextView? = null
     private var viewPassword: EditText? = null
-    private var progressBar: ProgressBar? = null
     private var mAuth: FirebaseAuth? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -23,7 +22,6 @@ class LoginActivity : AppCompatActivity() {
 
         viewEmail = findViewById<View>(R.id.email) as TextView
         viewPassword = findViewById<View>(R.id.password) as EditText
-        progressBar = findViewById<View>(R.id.login_progress) as ProgressBar
         mAuth = FirebaseAuth.getInstance()
 
         val viewSignUp = findViewById<View>(R.id.sign_up_link)
@@ -43,9 +41,6 @@ class LoginActivity : AppCompatActivity() {
     }
 
     private fun loginUserAccount() {
-        progressBar!!.visibility = View.VISIBLE
-
-//        onBackPressed()
         val email: String = viewEmail!!.text.toString()
         val password: String = viewPassword!!.text.toString()
 
@@ -59,7 +54,6 @@ class LoginActivity : AppCompatActivity() {
         }
 
         mAuth!!.signInWithEmailAndPassword(email, password).addOnCompleteListener {task ->
-            progressBar!!.visibility = View.GONE
             if (task.isSuccessful) {
                 Toast.makeText(applicationContext, "Login successful!", Toast.LENGTH_LONG).show()
 
@@ -74,7 +68,7 @@ class LoginActivity : AppCompatActivity() {
     }
 
     companion object {
-        val UserMail = "com.example.tesla.myhomelibrary.UMail"
-        val UserID = "com.example.tesla.myhomelibrary.UID"
+        const val UserMail = "com.example.tesla.myhomelibrary.UMail"
+        const val UserID = "com.example.tesla.myhomelibrary.UID"
     }
 }

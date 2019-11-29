@@ -36,27 +36,31 @@ class SignUpActivity : AppCompatActivity() {
         val confirmPassword = userConfirmPassword!!.text.toString()
 
         if (TextUtils.isEmpty(email)) {
-            Toast.makeText(applicationContext, "Please enter email...", Toast.LENGTH_LONG).show()
+            Toast.makeText(applicationContext, "Please enter email...", Toast.LENGTH_SHORT).show()
             return
         }
         if (TextUtils.isEmpty(password)) {
-            Toast.makeText(applicationContext, "Please enter password!", Toast.LENGTH_LONG).show()
+            Toast.makeText(applicationContext, "Please enter password!", Toast.LENGTH_SHORT).show()
             return
         }
         if (TextUtils.isEmpty(confirmPassword)) {
-            Toast.makeText(applicationContext, "Please enter password again!", Toast.LENGTH_LONG).show()
+            Toast.makeText(applicationContext, "Please enter password again!", Toast.LENGTH_SHORT).show()
             return
         }
 
-        mAuth.createUserWithEmailAndPassword(email, password)
-            .addOnCompleteListener { task ->
-                if (task.isSuccessful) {
-                    Toast.makeText(applicationContext, "Registration successful!", Toast.LENGTH_LONG).show()
-
-                    startActivity(Intent(this@SignUpActivity, LoginActivity::class.java))
-                } else {
-                    Toast.makeText(applicationContext, "Registration failed! Please try again later", Toast.LENGTH_LONG).show()
+        if (TextUtils.equals(password, confirmPassword)) {
+            mAuth.createUserWithEmailAndPassword(email, password)
+                .addOnCompleteListener { task ->
+                    if (task.isSuccessful) {
+                        Toast.makeText(applicationContext,"Registration successful!", Toast.LENGTH_SHORT).show()
+                        startActivity(Intent(this@SignUpActivity, LoginActivity::class.java))
+                    } else {
+                        Toast.makeText(applicationContext,"Registration failed! Please try again later", Toast.LENGTH_LONG).show()
+                    }
                 }
-            }
+        } else {
+            Toast.makeText(applicationContext, "Passwords do not match", Toast.LENGTH_SHORT).show()
+            return
+        }
     }
 }

@@ -6,7 +6,6 @@ import android.os.Bundle
 import android.text.TextUtils
 import android.view.View
 import android.widget.EditText
-import android.widget.ProgressBar
 import android.widget.TextView
 import android.widget.Toast
 import com.google.firebase.auth.FirebaseAuth
@@ -45,24 +44,24 @@ class LoginActivity : AppCompatActivity() {
         val password: String = viewPassword!!.text.toString()
 
         if (TextUtils.isEmpty(email)) {
-            Toast.makeText(applicationContext, "Please enter email...", Toast.LENGTH_LONG).show()
+            Toast.makeText(applicationContext, "Please enter email...", Toast.LENGTH_SHORT).show()
             return
         }
         if (TextUtils.isEmpty(password)) {
-            Toast.makeText(applicationContext, "Please enter password!", Toast.LENGTH_LONG).show()
+            Toast.makeText(applicationContext, "Please enter password!", Toast.LENGTH_SHORT).show()
             return
         }
 
         mAuth!!.signInWithEmailAndPassword(email, password).addOnCompleteListener {task ->
             if (task.isSuccessful) {
-                Toast.makeText(applicationContext, "Login successful!", Toast.LENGTH_LONG).show()
+                Toast.makeText(applicationContext, "Login successful!", Toast.LENGTH_SHORT).show()
 
                 val intent = Intent(applicationContext, HomeActivity::class.java)
                 intent.putExtra(UserMail, email)
                 intent.putExtra(UserID, mAuth!!.currentUser!!.uid)
                 startActivity(intent)
             } else {
-                Toast.makeText(applicationContext,"Login failed! Please try again later", Toast.LENGTH_LONG).show()
+                Toast.makeText(applicationContext,"Login failed! Please try again later", Toast.LENGTH_SHORT).show()
             }
         }
     }

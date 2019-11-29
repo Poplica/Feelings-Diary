@@ -55,7 +55,7 @@ class SignUpActivity : AppCompatActivity() {
                         Toast.makeText(applicationContext,"Registration successful!", Toast.LENGTH_SHORT).show()
                         startActivity(Intent(this@SignUpActivity, LoginActivity::class.java))
                     } else {
-                        Toast.makeText(applicationContext,"Registration failed! Please try again later", Toast.LENGTH_LONG).show()
+                        Toast.makeText(applicationContext,"Registration failed! Please try again later", Toast.LENGTH_SHORT).show()
                     }
                 }
         } else {

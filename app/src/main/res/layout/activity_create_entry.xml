@@ -48,6 +48,14 @@
             android:layout_marginTop="8dp"
             android:text="@string/tags"/>
 
+        <TextView
+            android:textColor="@color/white"
+            android:id="@+id/textView3"
+            android:layout_width="wrap_content"
+            android:layout_height="21dp"
+            android:layout_marginTop="8dp"
+            android:text="@string/message_text" />
+
         <EditText
             android:textColor="@color/white"
             android:textColorHint="@color/white"
@@ -82,12 +90,4 @@
             android:layout_marginTop="16dp"
             android:ems="10"
             android:inputType="textPersonName" />
-
-        <TextView
-            android:textColor="@color/white"
-            android:id="@+id/textView3"
-            android:layout_width="wrap_content"
-            android:layout_height="21dp"
-            android:layout_marginTop="8dp"
-            android:text="@string/message_text" />
 </LinearLayout>

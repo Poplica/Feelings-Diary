@@ -10,6 +10,7 @@ import android.view.Menu
 import android.view.MenuItem
 import android.view.View
 import com.google.firebase.auth.FirebaseAuth
+import java.io.Serializable
 import java.util.*
 
 private const val MIDNIGHT: Long = 43200000

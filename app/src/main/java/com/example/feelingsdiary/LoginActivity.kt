@@ -44,7 +44,7 @@ class LoginActivity : AppCompatActivity() {
         val password: String = viewPassword!!.text.toString()
 
         if (TextUtils.isEmpty(email)) {
-            Toast.makeText(applicationContext, "Please enter email...", Toast.LENGTH_SHORT).show()
+            Toast.makeText(applicationContext, "Please enter an email", Toast.LENGTH_SHORT).show()
             return
         }
         if (TextUtils.isEmpty(password)) {
@@ -61,7 +61,7 @@ class LoginActivity : AppCompatActivity() {
                 intent.putExtra(UserID, mAuth!!.currentUser!!.uid)
                 startActivity(intent)
             } else {
-                Toast.makeText(applicationContext,"Login failed! Please try again later", Toast.LENGTH_SHORT).show()
+                Toast.makeText(applicationContext,"Login failed! Wrong email or password", Toast.LENGTH_SHORT).show()
             }
         }
     }

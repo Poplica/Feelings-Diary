@@ -36,7 +36,7 @@ class SignUpActivity : AppCompatActivity() {
         val confirmPassword = userConfirmPassword!!.text.toString()
 
         if (TextUtils.isEmpty(email)) {
-            Toast.makeText(applicationContext, "Please enter email...", Toast.LENGTH_SHORT).show()
+            Toast.makeText(applicationContext, "Please enter an email", Toast.LENGTH_SHORT).show()
             return
         }
         if (TextUtils.isEmpty(password)) {

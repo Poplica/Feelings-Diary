@@ -29,12 +29,12 @@ class ForgotPasswordActivity : AppCompatActivity() {
         val email = userEmail!!.text.toString()
 
         if (TextUtils.isEmpty(email)) {
-            Toast.makeText(applicationContext, "Please enter email...", Toast.LENGTH_SHORT).show()
+            Toast.makeText(applicationContext, "Please enter an email", Toast.LENGTH_SHORT).show()
             return
         } else {
             mAuth.sendPasswordResetEmail(email).addOnCompleteListener {
                 if (it.isSuccessful) {
-                    Toast.makeText(applicationContext, "Success!", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(applicationContext, "Success! Email sent", Toast.LENGTH_SHORT).show()
                     startActivity(Intent(this@ForgotPasswordActivity, LoginActivity::class.java))
                 } else {
                     Toast.makeText(applicationContext, "Email does not exist in database", Toast.LENGTH_SHORT).show()

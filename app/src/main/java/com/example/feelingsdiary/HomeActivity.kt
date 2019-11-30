@@ -8,6 +8,9 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
+import android.view.View
+import com.google.firebase.auth.FirebaseAuth
+import java.util.*
 
 private const val MIDNIGHT: Long = 43200000
 
@@ -45,6 +48,36 @@ class HomeActivity : AppCompatActivity() {
                 pendingIntent
             )
         }
+
+        val buttonAddEntry = findViewById<View>(R.id.add_entry_button)
+        buttonAddEntry.setOnClickListener {
+            startActivityForResult(Intent(this@HomeActivity, CreateEntryActivity::class.java), 0)
+        }
+
+        val buttonGraph = findViewById<View>(R.id.graph_button)
+        buttonGraph.setOnClickListener {
+            startActivity(Intent(this@HomeActivity, GraphActivity::class.java))
+        }
+
+        val buttonCalendar = findViewById<View>(R.id.calendar_button)
+        buttonCalendar.setOnClickListener {
+            startActivity(Intent(this@HomeActivity, CalendarActivity::class.java))
+        }
+
+        val buttonSearch = findViewById<View>(R.id.search_button)
+        buttonSearch.setOnClickListener {
+            startActivity(Intent(this@HomeActivity, SearchActivity::class.java))
+        }
+    }
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+
+        if (resultCode == RESULT_OK) {
+            val intent = Intent(this@HomeActivity, ViewEntryActivity::class.java)
+            intent.putExtra("entry", data!!.getSerializableExtra("entry"))
+            startActivity(intent)
+        }
     }
 
     //Creates a menu in the toolbar
@@ -57,14 +90,17 @@ class HomeActivity : AppCompatActivity() {
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        when (item.itemId) {
+        return when (item.itemId) {
             R.id.settings_menu -> {
                 startActivity(Intent(this@HomeActivity, SettingsActivity::class.java))
-                return true
+                true
             }
-            // TODO - Sign out of firebase when logout menu option is selected
-            R.id.logout_menu -> return true
-            else -> return super.onOptionsItemSelected(item)
+            R.id.logout_menu -> {
+                FirebaseAuth.getInstance().signOut()
+                finish()
+                true
+            }
+            else -> super.onOptionsItemSelected(item)
         }
     }
 }

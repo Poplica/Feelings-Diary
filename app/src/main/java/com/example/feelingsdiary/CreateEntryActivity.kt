@@ -43,6 +43,9 @@ class CreateEntryActivity : AppCompatActivity() {
             } catch (e : Exception) {
                 arrayListOf(userTags.text.toString())
             }
+            for (i in 0..(entryTags.size - 1)) {
+                entryTags[i] = entryTags[i].trim()
+            }
 
             val journalEntry = JournalEntry(
                 complexDate,

@@ -7,12 +7,13 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:gravity="center"
+    android:padding="32dp"
     tools:context=".CreateEntryActivity">
         <TextView
             android:textColor="@color/white"
             android:id="@+id/textView"
-            android:layout_width="172dp"
-            android:layout_height="23dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
             android:layout_marginTop="28dp"
             android:text="@string/text"
             android:textAppearance="@style/TextAppearance.AppCompat" />
@@ -40,13 +41,17 @@
                     android:text="☺"
                     android:textSize="20pt"/>
         </LinearLayout>
-        <TextView
+        <EditText
             android:textColor="@color/white"
-            android:id="@+id/textView2"
-            android:layout_width="wrap_content"
-            android:layout_height="0dp"
-            android:layout_marginTop="8dp"
-            android:text="@string/tags"/>
+            android:textColorHint="@color/white"
+            android:theme="@style/EditTextTheme"
+            android:hint="@string/tags"
+            android:id="@+id/tags"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:ems="10"
+            android:inputType="textPersonName" />
 
         <TextView
             android:textColor="@color/white"
@@ -61,7 +66,7 @@
             android:textColorHint="@color/white"
             android:theme="@style/EditTextTheme"
             android:id="@+id/entry"
-            android:layout_width="295dp"
+            android:layout_width="match_parent"
             android:layout_height="179dp"
             android:layout_marginTop="8dp"
             android:autofillHints=""
@@ -79,15 +84,4 @@
             android:text="@string/submit"
             android:textColor="@color/white"
             android:background="@color/colorPrimaryDark"/>
-
-        <EditText
-            android:textColor="@color/white"
-            android:textColorHint="@color/white"
-            android:theme="@style/EditTextTheme"
-            android:id="@+id/tags"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
-            android:ems="10"
-            android:inputType="textPersonName" />
 </LinearLayout>

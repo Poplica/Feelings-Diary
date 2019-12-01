@@ -57,8 +57,8 @@ class LoginActivity : AppCompatActivity() {
                 Toast.makeText(applicationContext, "Login successful!", Toast.LENGTH_SHORT).show()
 
                 val intent = Intent(applicationContext, HomeActivity::class.java)
-                intent.putExtra(UserMail, email)
-                intent.putExtra(UserID, mAuth!!.currentUser!!.uid)
+//                intent.putExtra(UserMail, email)
+//                intent.putExtra(UserID, mAuth!!.currentUser!!.uid)
                 startActivity(intent)
             } else {
                 Toast.makeText(applicationContext,"Login failed! Wrong email or password", Toast.LENGTH_SHORT).show()
@@ -66,8 +66,8 @@ class LoginActivity : AppCompatActivity() {
         }
     }
 
-    companion object {
-        const val UserMail = "com.example.tesla.myhomelibrary.UMail"
-        const val UserID = "com.example.tesla.myhomelibrary.UID"
-    }
+//    companion object {
+//        const val UserMail = "com.example.tesla.myhomelibrary.UMail"
+//        const val UserID = "com.example.tesla.myhomelibrary.UID"
+//    }
 }

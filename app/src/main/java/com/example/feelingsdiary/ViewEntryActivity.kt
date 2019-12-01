@@ -60,8 +60,7 @@ class ViewEntryActivity : AppCompatActivity() {
                 for (child in dataSnapshot.child(entry.getSimpleDate()).children) {
                     // finds the matching entry to remove from the database
                     if (child.getValue(JournalEntry::class.java)!!.getDate() == entry.getDate() &&
-                        child.getValue(JournalEntry::class.java)!!.getEntry() == entry.getEntry()
-                    ) {
+                        child.getValue(JournalEntry::class.java)!!.getEntry() == entry.getEntry()) {
                         child.ref.removeValue()
                     }
                 }

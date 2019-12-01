@@ -31,15 +31,18 @@ class ChangePasswordActivity : AppCompatActivity() {
         val password = userPassword!!.text.toString()
         val confirmPassword = userConfirmPassword!!.text.toString()
 
+        // password field empty check
         if (TextUtils.isEmpty(password)) {
             Toast.makeText(applicationContext, "Please enter password!", Toast.LENGTH_SHORT).show()
             return
         }
+        // confirm password field empty check
         if (TextUtils.isEmpty(confirmPassword)) {
             Toast.makeText(applicationContext, "Please enter password again!", Toast.LENGTH_SHORT).show()
             return
         }
 
+        // check if new password fields match
         if (TextUtils.equals(password, confirmPassword)) {
             mAuth.currentUser!!.updatePassword(password)
             Toast.makeText(applicationContext,"Password successfully changed!", Toast.LENGTH_SHORT).show()

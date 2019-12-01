@@ -31,6 +31,11 @@ class CreateEntryActivity : AppCompatActivity() {
             val fbDate = Calendar.getInstance().time
             val simpleDate = sdf.format(fbDate)
 
+            // database schema:
+            // root ->
+                // current user ID ->
+                    // date of entries ->
+                        // journal entries with fields: date, entry, rating, tags
             val root = FirebaseDatabase.getInstance().reference
             val pointer = root.child(FirebaseAuth.getInstance().currentUser!!.uid).child(simpleDate).push()
 
@@ -38,9 +43,9 @@ class CreateEntryActivity : AppCompatActivity() {
             val complexDate = sdf.format(fbDate)
 
             lateinit var entryTags: ArrayList<String>
-            entryTags = try {
+            entryTags = try { // for tag size > 1
                 userTags.text.split(",") as ArrayList<String>
-            } catch (e : Exception) {
+            } catch (e : Exception) { // for tag size <= 1
                 arrayListOf(userTags.text.toString())
             }
 
@@ -49,7 +54,8 @@ class CreateEntryActivity : AppCompatActivity() {
                 userEntry.text.toString(),
                 (userSeekBar.progress + 1).toString(),
 //                userTags.text.split(",") as ArrayList<String>
-                entryTags
+                entryTags,
+                simpleDate
             )
             pointer.setValue(journalEntry)
 

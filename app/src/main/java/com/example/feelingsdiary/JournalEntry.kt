@@ -6,7 +6,8 @@ data class JournalEntry (
     private var date: String = "",
     private var entry: String = "",
     private var rating: String = "",
-    private var tags: ArrayList<String> = arrayListOf()
+    private var tags: ArrayList<String> = arrayListOf(),
+    private var simpleDate: String = ""
     ) : Serializable {
 
     fun getDate(): String {
@@ -23,5 +24,14 @@ data class JournalEntry (
 
     fun getTags(): ArrayList<String> {
         return tags
+    }
+
+    fun getSimpleDate(): String {
+        return simpleDate
+    }
+
+    // used for debugging
+    override fun toString(): String {
+        return date
     }
 }

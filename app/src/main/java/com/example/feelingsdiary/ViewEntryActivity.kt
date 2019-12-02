@@ -3,14 +3,14 @@ package com.example.feelingsdiary
 import android.content.DialogInterface
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import android.widget.RatingBar
 import android.widget.SeekBar
 import android.widget.TextView
 import androidx.appcompat.app.AlertDialog
 import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.database.DatabaseReference
-import com.google.firebase.database.FirebaseDatabase
+import com.google.firebase.database.*
 import kotlinx.android.synthetic.main.activity_create_entry.*
 import java.lang.StringBuilder
 
@@ -34,14 +34,18 @@ class ViewEntryActivity : AppCompatActivity() {
         tags.text = entry.getTags().joinToString()
         thoughtsText.text = entry.getEntry()
 
+        // deletion alert box
         val deleteAlert = AlertDialog.Builder(this@ViewEntryActivity)
         deleteAlert.setTitle(R.string.delete_prompt)
 
+        // yes, so delete selected entry
         deleteAlert.setPositiveButton(R.string.yes_delete) {dialog, which ->
             deleteEntry(pointer, entry)
+            setResult(2)
+            finish()
         }
 
-        deleteAlert.setNegativeButton(R.string.cancel) { dialog, which ->
+        deleteAlert.setNegativeButton(R.string.cancel) { dialog, _ ->
             dialog.cancel()
         }
 
@@ -52,8 +56,21 @@ class ViewEntryActivity : AppCompatActivity() {
     }
 
     private fun deleteEntry(pointer: DatabaseReference, entry: JournalEntry) {
+        pointer.addValueEventListener(object : ValueEventListener {
+            override fun onDataChange(dataSnapshot: DataSnapshot) {
+                // iterating over all currUserID's specified date by entry
+                for (date in dataSnapshot.child(entry.getSimpleDate()).children) {
+                    // finds the matching entry to remove from the database
+                    if (date.getValue(JournalEntry::class.java)!!.getDate() == entry.getDate() &&
+                            date.getValue(JournalEntry::class.java)!!.getEntry() == entry.getEntry() &&
+                            date.getValue(JournalEntry::class.java)!!.getRating() == entry.getRating()) {
+                        date.ref.removeValue()
+                        break
+                    }
+                }
+            }
 
-
-        finish()
+            override fun onCancelled(databaseError: DatabaseError) {}
+        })
     }
 }

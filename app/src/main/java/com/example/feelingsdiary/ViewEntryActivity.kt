@@ -41,6 +41,8 @@ class ViewEntryActivity : AppCompatActivity() {
         // yes, so delete selected entry
         deleteAlert.setPositiveButton(R.string.yes_delete) {dialog, which ->
             deleteEntry(pointer, entry)
+            setResult(2)
+            finish()
         }
 
         deleteAlert.setNegativeButton(R.string.cancel) { dialog, _ ->
@@ -57,18 +59,18 @@ class ViewEntryActivity : AppCompatActivity() {
         pointer.addValueEventListener(object : ValueEventListener {
             override fun onDataChange(dataSnapshot: DataSnapshot) {
                 // iterating over all currUserID's specified date by entry
-                for (child in dataSnapshot.child(entry.getSimpleDate()).children) {
+                for (date in dataSnapshot.child(entry.getSimpleDate()).children) {
                     // finds the matching entry to remove from the database
-                    if (child.getValue(JournalEntry::class.java)!!.getDate() == entry.getDate() &&
-                        child.getValue(JournalEntry::class.java)!!.getEntry() == entry.getEntry()) {
-                        child.ref.removeValue()
+                    if (date.getValue(JournalEntry::class.java)!!.getDate() == entry.getDate() &&
+                            date.getValue(JournalEntry::class.java)!!.getEntry() == entry.getEntry() &&
+                            date.getValue(JournalEntry::class.java)!!.getRating() == entry.getRating()) {
+                        date.ref.removeValue()
+                        break
                     }
                 }
             }
 
             override fun onCancelled(databaseError: DatabaseError) {}
         })
-
-        finish()
     }
 }

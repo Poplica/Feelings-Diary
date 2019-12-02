@@ -31,7 +31,7 @@ data class JournalEntry (
     }
 
     // used for debugging
-//    override fun toString(): String {
-//        return date
-//    }
+    override fun toString(): String {
+        return date
+    }
 }

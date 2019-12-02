@@ -50,22 +50,22 @@ class SearchActivityAdapter(private val context: Context) : BaseAdapter() {
         val rating = Integer.parseInt(currEntry.getRating())
         when {
             rating >= 4 -> {
-                holder.dateTime!!.setTextColor(parseColor("#849974"))
-                holder.entry!!.setTextColor(parseColor("#849974"))
-                holder.moodRating!!.setTextColor(parseColor("#849974"))
-                holder.tags!!.setTextColor(parseColor("#849974"))
+                holder.dateTime!!.setTextColor(parseColor("#FFFFFF"))
+                holder.entry!!.setTextColor(parseColor("#FFFFFF"))
+                holder.moodRating!!.setTextColor(parseColor("#FFFFFF"))
+                holder.tags!!.setTextColor(parseColor("#FFFFFF"))
             }
             rating > 2 -> {
-                holder.dateTime!!.setTextColor(parseColor("#E9DCCD"))
-                holder.entry!!.setTextColor(parseColor("#E9DCCD"))
-                holder.moodRating!!.setTextColor(parseColor("#E9DCCD"))
-                holder.tags!!.setTextColor(parseColor("#E9DCCD"))
+                holder.dateTime!!.setTextColor(parseColor("#C2D5EE"))
+                holder.entry!!.setTextColor(parseColor("#C2D5EE"))
+                holder.moodRating!!.setTextColor(parseColor("#C2D5EE"))
+                holder.tags!!.setTextColor(parseColor("#C2D5EE"))
             }
             else -> {
-                holder.dateTime!!.setTextColor(parseColor("#36384C"))
-                holder.entry!!.setTextColor(parseColor("#36384C"))
-                holder.moodRating!!.setTextColor(parseColor("#36384C"))
-                holder.tags!!.setTextColor(parseColor("#36384C"))
+                holder.dateTime!!.setTextColor(parseColor("#97B4D7"))
+                holder.entry!!.setTextColor(parseColor("#97B4D7"))
+                holder.moodRating!!.setTextColor(parseColor("#97B4D7"))
+                holder.tags!!.setTextColor(parseColor("#97B4D7"))
             }
         }
 

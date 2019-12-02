@@ -59,6 +59,7 @@ tools:context=".SearchActivity">
         android:id="@+id/search_layout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:background="@color/colorPrimaryDark"
         android:orientation="horizontal"
         tools:layout_editor_absoluteX="8dp"
         tools:layout_editor_absoluteY="180dp"></LinearLayout>

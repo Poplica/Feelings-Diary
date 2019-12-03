@@ -55,6 +55,7 @@ class ViewEntryActivity : AppCompatActivity() {
         }
     }
 
+    // find exact entry requested for deletion
     private fun deleteEntry(pointer: DatabaseReference, entry: JournalEntry) {
         pointer.addValueEventListener(object : ValueEventListener {
             override fun onDataChange(dataSnapshot: DataSnapshot) {

@@ -2,6 +2,7 @@ package com.example.feelingsdiary
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 
 
 import lecho.lib.hellocharts.view.LineChartView
@@ -16,6 +17,7 @@ import java.text.SimpleDateFormat
 import java.util.*
 import kotlin.collections.ArrayList
 import java.time.LocalDate
+import java.time.ZoneId
 
 
 class GraphActivity : AppCompatActivity() {
@@ -45,9 +47,14 @@ class GraphActivity : AppCompatActivity() {
         var day = calendar.get(Calendar.DAY_OF_WEEK)
         var today = LocalDate.now()
         var startDate = today
-
-        var convertDate = formatter.parse(today.toString())
-        var mmddyy = formatter.format(convertDate)
+        var tempConvert = Date.from(today.atStartOfDay()
+            .atZone(ZoneId.systemDefault())
+            .toInstant())
+        //var convertDate = formatter.parse(today.toString())
+        Log.i("DateTesting", today.toString())
+        var mmddyy = formatter.format(tempConvert)
+        Log.i("DateTesting", mmddyy)
+        //Log.i("DateTesting", convertDate.toString())
         var sum = 0.0
         var total = 0.0
 
@@ -55,46 +62,127 @@ class GraphActivity : AppCompatActivity() {
         when (day) {
             Calendar.SUNDAY -> {
                 //calculate current day - 0
+                Log.i("GraphActivity", "Sunday")
             }
             Calendar.MONDAY -> {
                 startDate = today.minusDays(1)
+                Log.i("GraphActivity", "Monday")
             }
             Calendar.TUESDAY -> {
                 //calculate current day - 2
                 startDate = today.minusDays(2)
+                Log.i("GraphActivity", "Tuesday")
             }
             Calendar.WEDNESDAY->{
                 //calculate current day - 3
                 startDate = today.minusDays(3)
+                Log.i("GraphActivity", "Wednesday")
             }
             Calendar.THURSDAY->{
                 //calculate current day - 4
                 startDate = today.minusDays(4)
+                Log.i("GraphActivity", "Thursday")
             }
             Calendar.FRIDAY->{
                 //calculate current day - 5
                 startDate = today.minusDays(5)
+                Log.i("GraphActivity", "Friday")
             }
             Calendar.SATURDAY->{
                 //calculate current day - 6
                 startDate = today.minusDays(6)
+                Log.i("GraphActivity", "Saturday")
             }
             else->{
                 //impossible
             }
         }
-        while (startDate.isBefore(today) || startDate.isEqual(today)) {
-            convertDate = formatter.parse(startDate.toString())
-            mmddyy = formatter.format(convertDate)
-            currUser.addValueEventListener(object : ValueEventListener {
-                override fun onDataChange(dataSnapshot: DataSnapshot) {
+        Log.i("GraphActivity", startDate.toString())
+        currUser.addValueEventListener(object : ValueEventListener {
+            override fun onDataChange(dataSnapshot: DataSnapshot) {
+                while(startDate.isBefore(today) || startDate.isEqual(today)) {
+                    Log.i("GraphActivity", "Whileloop Day")
+                    Log.i("GraphActivity", startDate.toString())
+                    tempConvert = Date.from(startDate.atStartOfDay()
+                        .atZone(ZoneId.systemDefault())
+                        .toInstant())
+                    mmddyy = formatter.format(tempConvert)
+                    Log.i("GraphActivity", mmddyy)
                     userRatingList!!.clear()
+                    Log.i("Tag", dataSnapshot.childrenCount.toString())
                     for (simpleDates in dataSnapshot.children) {
+                        Log.i("GraphActivity", "simpleDates.key then mmddyy below")
+                        Log.i("GraphActivity", simpleDates.key)
+                        Log.i("GraphActivity", mmddyy)
                         if(simpleDates.key == mmddyy) {
+                            Log.i("GraphActivity", "check Works")
                             sum = 0.0
                             total = 0.0
                             for (entry in simpleDates.children) {
-                                userRatingList!!.add(entry.getValue(JournalEntry::class.java)!!.getRating().toDouble())
+                                if(entry.getValue(JournalEntry::class.java)!!.getRating().toDouble() == null){
+                                    Log.i("GraphActivity", "Rating or item null")
+                                }
+                                else {
+                                    userRatingList!!.add(entry.getValue(JournalEntry::class.java)!!.getRating().toDouble())
+                                    Log.i("Rating Added", entry.getValue(JournalEntry::class.java)!!.getRating())
+                                }
+                            }
+                            for (i in userRatingList!!){
+                                sum = sum + i
+                                Log.i("Adding Ratings",  sum.toString())
+                            }
+                            //ADD CASE FOR NO ENTRIES
+                        }
+                        if(userRatingList!!.size != 0) {
+                            total = sum / (userRatingList!!.size)
+                            Log.i("The average is", total.toString())
+                        }
+                        else{
+                            total = 0.0
+                        }
+                        allAverages.add(total)
+                        Log.i("Average added for entries from", startDate.toString())
+
+                    }
+                    startDate = startDate.plusDays(1)
+                    Log.i("The new date is", startDate.toString())
+                    if(!startDate.isBefore(today) && !startDate.isEqual(today)){
+                        break
+                    }
+                }
+            }
+            override fun onCancelled(databaseError: DatabaseError) {}
+        })
+        Log.i("GraphActivity", "Free from the loop!")
+        /*while (startDate.isBefore(today) || startDate.isEqual(today)) {
+            Log.i("GraphActivity", "Whileloop Day")
+            Log.i("GraphActivity", startDate.toString())
+            tempConvert = Date.from(startDate.atStartOfDay()
+                .atZone(ZoneId.systemDefault())
+                .toInstant())
+            mmddyy = formatter.format(tempConvert)
+            Log.i("GraphActivity", mmddyy)
+            currUser.addValueEventListener(object : ValueEventListener {
+                override fun onDataChange(dataSnapshot: DataSnapshot) {
+                    userRatingList!!.clear()
+//                    Log.i("Tag", dataSnapshot.childrenCount.toString())
+                    for (simpleDates in dataSnapshot.children) {
+                        Log.i("GraphActivity", "simpleDates.key then mmddyy below")
+                        Log.i("GraphActivity", simpleDates.key)
+                        Log.i("GraphActivity", mmddyy)
+                        if(simpleDates.key == mmddyy) {
+                            Log.i("GraphActivity", "check Works")
+                            sum = 0.0
+                            total = 0.0
+                            for (entry in simpleDates.children) {
+                                if(entry.getValue(JournalEntry::class.java)!!.getRating().toDouble() == null){
+                                    Log.i("GraphActivity", "Rating or item null")
+                                }
+                                else {
+                                    userRatingList!!.add(entry.getValue(JournalEntry::class.java)!!.getRating().toDouble())
+                                    Log.i("Rating Added", entry.getValue(JournalEntry::class.java)!!.getRating())
+                                }
+
                             }
                             for (i in userRatingList!!){
                                 sum = sum + i
@@ -114,9 +202,22 @@ class GraphActivity : AppCompatActivity() {
                 override fun onCancelled(databaseError: DatabaseError) {}
             })
             startDate = startDate.plusDays(1)
-        }
+            Log.i("The day is now", startDate.toString())
+        }*/
         val tempAxis = arrayOfNulls<Double>(userRatingList!!.size)
         val yAxisData = userRatingList!!.toArray(tempAxis)
+        if(userRatingList == null){
+            Log.i("GraphActivity", "That jont null")
+        }
+        for(j in userRatingList!!){
+            if(j == null){
+                Log.i("GraphActivity", "Value is null")
+            }
+            else {
+                Log.i("GraphActivity", j.toString())
+            }
+        }
+        //val yAxisData = doubleArrayOf(3.0, 2.0, 5.0)
         val yAxisValues = ArrayList<PointValue>()
         val axisValues = ArrayList<AxisValue>()
         val line = Line(yAxisValues)

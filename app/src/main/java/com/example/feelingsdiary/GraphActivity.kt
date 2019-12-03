@@ -30,7 +30,7 @@ class GraphActivity : AppCompatActivity() {
         setContentView(R.layout.activity_graph)
 
         val lineChartView = findViewById<LineChartView>(R.id.chart)
-        val axisData = arrayOf(
+        val allDays = arrayOf(
             "SUN",
             "MON",
             "TUE",
@@ -40,9 +40,6 @@ class GraphActivity : AppCompatActivity() {
             "SAT"
         )
 
-        //val yAxisData = doubleArrayOf()
-        //val axisValues = ArrayList<AxisValue>()
-        allAverages.clear()
         var formatter = SimpleDateFormat("MM-dd-yy")
         var calendar = Calendar.getInstance()
         var day = calendar.get(Calendar.DAY_OF_WEEK)
@@ -51,13 +48,12 @@ class GraphActivity : AppCompatActivity() {
         var tempConvert = Date.from(today.atStartOfDay()
             .atZone(ZoneId.systemDefault())
             .toInstant())
-        //var convertDate = formatter.parse(today.toString())
         Log.i("DateTesting", today.toString())
         var mmddyy = formatter.format(tempConvert)
         Log.i("DateTesting", mmddyy)
-        //Log.i("DateTesting", convertDate.toString())
         var sum = 0.0
         var total = 0.0
+        var dayFound = 0
 
 
         when (day) {
@@ -98,17 +94,12 @@ class GraphActivity : AppCompatActivity() {
                 //impossible
             }
         }
-        /*val gooseArr: ArrayList<String> = arrayListOf("5436534634")
-        val journalEntry = JournalEntry(
-            "gooseEgg",
-            "gooseEgg",
-            "gooseEgg",
-            gooseArr,
-            "gooseEgg"
-        )*/
+
         Log.i("GraphActivity", startDate.toString())
         currUser.addValueEventListener(object : ValueEventListener {
             override fun onDataChange(dataSnapshot: DataSnapshot) {
+                allAverages.clear()
+                //iterate through days from sunday onward
                 while(startDate.isBefore(today) || startDate.isEqual(today)) {
                     Log.i("GraphActivity", "Whileloop Day")
                     Log.i("GraphActivity", startDate.toString())
@@ -117,13 +108,17 @@ class GraphActivity : AppCompatActivity() {
                         .toInstant())
                     mmddyy = formatter.format(tempConvert)
                     Log.i("GraphActivity", mmddyy)
-                    userRatingList!!.clear()
                     Log.i("Tag", dataSnapshot.childrenCount.toString())
+                    dayFound = 0
+                    //iterate through days with entries
                     for (simpleDates in dataSnapshot.children) {
+                        userRatingList!!.clear()
                         Log.i("GraphActivity", "simpleDates.key then mmddyy below")
                         Log.i("GraphActivity", simpleDates.key)
                         Log.i("GraphActivity", mmddyy)
+                        //check to see if current day matches an entry day
                         if(simpleDates.key == mmddyy) {
+                            //add up ratings and calculate average for that days entries
                             Log.i("GraphActivity", "check Works")
                             sum = 0.0
                             total = 0.0
@@ -142,122 +137,69 @@ class GraphActivity : AppCompatActivity() {
                             }
                             //ADD CASE FOR NO ENTRIES
                         }
+                        //add entries into the allAverages list
                         if(userRatingList!!.size != 0) {
                             total = sum / (userRatingList!!.size)
                             Log.i("The average is", total.toString())
-                            allAverages.add(total)
-                        }
-                        else{
-                            total = 0.0
-                            allAverages.add(total)
-                        }
-                        Log.i("Average added for entries from", startDate.toString())
+                            if(dayFound == 0) {
+                                allAverages.add(total)
+                                dayFound = 1
+                            }
 
+                        }
                     }
+                    //if day is not found in entries add a 0.0 value for that day
+                    if(dayFound == 0){
+                        allAverages.add(0.0)
+                    }
+                    //iterate to the next day, break if at end
                     startDate = startDate.plusDays(1)
                     Log.i("The new date is", startDate.toString())
                     if(!startDate.isBefore(today) && !startDate.isEqual(today)){
                         break
                     }
                 }
+                //funciton to draw real graph
                 drawGraph()
             }
             override fun onCancelled(databaseError: DatabaseError) {Log.i("GraphActivity", "onCancelled")}
         })
         Log.i("After free", "Free from the loop!")
-        /*while (startDate.isBefore(today) || startDate.isEqual(today)) {
-            Log.i("GraphActivity", "Whileloop Day")
-            Log.i("GraphActivity", startDate.toString())
-            tempConvert = Date.from(startDate.atStartOfDay()
-                .atZone(ZoneId.systemDefault())
-                .toInstant())
-            mmddyy = formatter.format(tempConvert)
-            Log.i("GraphActivity", mmddyy)
-            currUser.addValueEventListener(object : ValueEventListener {
-                override fun onDataChange(dataSnapshot: DataSnapshot) {
-                    userRatingList!!.clear()
-//                    Log.i("Tag", dataSnapshot.childrenCount.toString())
-                    for (simpleDates in dataSnapshot.children) {
-                        Log.i("GraphActivity", "simpleDates.key then mmddyy below")
-                        Log.i("GraphActivity", simpleDates.key)
-                        Log.i("GraphActivity", mmddyy)
-                        if(simpleDates.key == mmddyy) {
-                            Log.i("GraphActivity", "check Works")
-                            sum = 0.0
-                            total = 0.0
-                            for (entry in simpleDates.children) {
-                                if(entry.getValue(JournalEntry::class.java)!!.getRating().toDouble() == null){
-                                    Log.i("GraphActivity", "Rating or item null")
-                                }
-                                else {
-                                    userRatingList!!.add(entry.getValue(JournalEntry::class.java)!!.getRating().toDouble())
-                                    Log.i("Rating Added", entry.getValue(JournalEntry::class.java)!!.getRating())
-                                }
 
-                            }
-                            for (i in userRatingList!!){
-                                sum = sum + i
-                            }
-                            //ADD CASE FOR NO ENTRIES
-                        }
-                        if(userRatingList!!.size != 0) {
-                            total = sum / (userRatingList!!.size)
-                        }
-                        else{
-                            total = 0.0
-                        }
-                        allAverages.add(total)
-                    }
-                }
-
-                override fun onCancelled(databaseError: DatabaseError) {}
-            })
-            startDate = startDate.plusDays(1)
-            Log.i("The day is now", startDate.toString())
-        }*/
-        Log.i("After free", "Nothing weird happening")
-
-        //val tempAxis = arrayOfNulls<Double>(allAverages!!.size)
-        //val yAxisData = allAverages!!.toArray(tempAxis)
-        if(userRatingList == null){
-            Log.i("GraphActivity", "That jont null")
-        }
-        Log.i("allAverages", allAverages.size.toString())
-        for(j in 0 .. allAverages!!.size - 1){
-            Log.i("allAverages", allAverages.get(j).toString())
-        }
-        val yAxisData = doubleArrayOf(0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0)
-        val yAxisValues = ArrayList<PointValue>()
-        val axisValues = ArrayList<AxisValue>()
-        val line = Line(yAxisValues)
-        for (i in 0 until axisData.size) {
-            axisValues.add(i, AxisValue(i.toFloat()).setLabel(axisData[i]))
+        val zeroBase = doubleArrayOf(0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0)
+        val yVals = ArrayList<PointValue>()
+        val xVals = ArrayList<AxisValue>()
+        val line = Line(yVals)
+        for (i in 0 until allDays.size) {
+            xVals.add(i, AxisValue(i.toFloat()).setLabel(allDays[i]))
         }
 
-        for (i in 0 until allAverages.size) {
+        /*for (i in 0 until allAverages.size) {
             yAxisValues.add(PointValue(i.toFloat(), allAverages!!.get(i).toFloat()))
-        }
-        for (i in 0 until yAxisData.size) {
-            yAxisValues.add(PointValue(i.toFloat(), yAxisData[i]!!.toFloat()))
+        }*/
+        for (i in 0 until zeroBase.size) {
+            yVals.add(PointValue(i.toFloat(), zeroBase[i]!!.toFloat()))
         }
         val lines = ArrayList<Line>()
         lines.add(line)
         val data = LineChartData()
         data.setLines(lines);
         lineChartView.setLineChartData(data);
-        val axis = Axis()
-        axis.setValues(axisValues)
-        data.axisXBottom = axis
+        val xAxis = Axis()
+        xAxis.setValues(xVals)
+        data.axisXBottom = xAxis
         val yAxis = Axis()
         data.axisYLeft = yAxis
 
     }
 
     private fun drawGraph() {
-        super.onStart()
-        Log.i("ENTERINGONSTART", "ONSTART")
+        Log.i("allAverages", allAverages.size.toString())
+        for(j in 0 .. allAverages!!.size - 1){
+            Log.i("allAverages", allAverages.get(j).toString())
+        }
         val lineChartView = findViewById<LineChartView>(R.id.chart)
-        val axisData = arrayOf(
+        val allDays = arrayOf(
             "SUN",
             "MON",
             "TUE",
@@ -266,27 +208,31 @@ class GraphActivity : AppCompatActivity() {
             "FRI",
             "SAT"
         )
-        val yAxisValues = ArrayList<PointValue>()
-        val axisValues = ArrayList<AxisValue>()
-        val line = Line(yAxisValues)
-        for (i in 0 until axisData.size) {
-            axisValues.add(i, AxisValue(i.toFloat()).setLabel(axisData[i]))
+        //below are demo values (IF ALLOWED) just incase we want to present a more populated graph (depending on what day of the week our presentation is)
+        //val demoValues = doubleArrayOf(2.0, 3.5, 1.0, 4.3, 5.0, 1.5, 3.6)
+        val yVals = ArrayList<PointValue>()
+        val xVals = ArrayList<AxisValue>()
+        val line = Line(yVals)
+        for (i in 0 until allDays.size) {
+            xVals.add(i, AxisValue(i.toFloat()).setLabel(allDays[i]))
         }
 
         for (i in 0 until allAverages.size) {
-            yAxisValues.add(PointValue(i.toFloat(), allAverages!!.get(i).toFloat()))
+            yVals.add(PointValue(i.toFloat(), allAverages!!.get(i).toFloat()))
         }
-        /*for (i in 0 until yAxisData.size) {
-            yAxisValues.add(PointValue(i.toFloat(), yAxisData[i]!!.toFloat()))
+        //loop adding demo values
+        /*for (i in 0 until demoValues.size) {
+            yVals.add(PointValue(i.toFloat(), demoValues[i].toFloat()))
         }*/
+
         val lines = ArrayList<Line>()
         lines.add(line)
         val data = LineChartData()
         data.setLines(lines);
         lineChartView.setLineChartData(data);
-        val axis = Axis()
-        axis.setValues(axisValues)
-        data.axisXBottom = axis
+        val xAxis = Axis()
+        xAxis.setValues(xVals)
+        data.axisXBottom = xAxis
         val yAxis = Axis()
         data.axisYLeft = yAxis
 

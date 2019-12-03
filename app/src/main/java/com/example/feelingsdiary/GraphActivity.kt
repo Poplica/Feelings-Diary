@@ -160,6 +160,7 @@ class GraphActivity : AppCompatActivity() {
                         break
                     }
                 }
+                drawGraph()
             }
             override fun onCancelled(databaseError: DatabaseError) {Log.i("GraphActivity", "onCancelled")}
         })
@@ -218,14 +219,53 @@ class GraphActivity : AppCompatActivity() {
 
         //val tempAxis = arrayOfNulls<Double>(allAverages!!.size)
         //val yAxisData = allAverages!!.toArray(tempAxis)
-        /*if(userRatingList == null){
+        if(userRatingList == null){
             Log.i("GraphActivity", "That jont null")
-        }*/
+        }
         Log.i("allAverages", allAverages.size.toString())
         for(j in 0 .. allAverages!!.size - 1){
             Log.i("allAverages", allAverages.get(j).toString())
         }
-        //val yAxisData = doubleArrayOf(3.6666666666666666666, 2.0, 5.0, 1.0, 3.0, 3.0, 2.0)
+        val yAxisData = doubleArrayOf(0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0)
+        val yAxisValues = ArrayList<PointValue>()
+        val axisValues = ArrayList<AxisValue>()
+        val line = Line(yAxisValues)
+        for (i in 0 until axisData.size) {
+            axisValues.add(i, AxisValue(i.toFloat()).setLabel(axisData[i]))
+        }
+
+        for (i in 0 until allAverages.size) {
+            yAxisValues.add(PointValue(i.toFloat(), allAverages!!.get(i).toFloat()))
+        }
+        for (i in 0 until yAxisData.size) {
+            yAxisValues.add(PointValue(i.toFloat(), yAxisData[i]!!.toFloat()))
+        }
+        val lines = ArrayList<Line>()
+        lines.add(line)
+        val data = LineChartData()
+        data.setLines(lines);
+        lineChartView.setLineChartData(data);
+        val axis = Axis()
+        axis.setValues(axisValues)
+        data.axisXBottom = axis
+        val yAxis = Axis()
+        data.axisYLeft = yAxis
+
+    }
+
+    private fun drawGraph() {
+        super.onStart()
+        Log.i("ENTERINGONSTART", "ONSTART")
+        val lineChartView = findViewById<LineChartView>(R.id.chart)
+        val axisData = arrayOf(
+            "SUN",
+            "MON",
+            "TUE",
+            "WED",
+            "THUR",
+            "FRI",
+            "SAT"
+        )
         val yAxisValues = ArrayList<PointValue>()
         val axisValues = ArrayList<AxisValue>()
         val line = Line(yAxisValues)

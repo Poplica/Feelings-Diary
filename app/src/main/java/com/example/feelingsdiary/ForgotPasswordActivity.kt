@@ -28,6 +28,7 @@ class ForgotPasswordActivity : AppCompatActivity() {
 
         val email = userEmail!!.text.toString()
 
+        // empty field check
         if (TextUtils.isEmpty(email)) {
             Toast.makeText(applicationContext, "Please enter an email", Toast.LENGTH_SHORT).show()
             return

@@ -42,6 +42,7 @@ class CreateEntryActivity : AppCompatActivity() {
             sdf = SimpleDateFormat("EEE, MMM dd, yyyy, h:mm a", Locale.US)
             val complexDate = sdf.format(fbDate)
 
+            // get tags from user input
             lateinit var entryTags: ArrayList<String>
             entryTags = try { // for tag size > 1
                 userTags.text.split(",") as ArrayList<String>
@@ -52,6 +53,7 @@ class CreateEntryActivity : AppCompatActivity() {
                 entryTags[i] = entryTags[i].trim()
             }
 
+            // serialize object and put in database
             val journalEntry = JournalEntry(
                 complexDate,
                 userEntry.text.toString(),

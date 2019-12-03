@@ -35,6 +35,7 @@ class SignUpActivity : AppCompatActivity() {
         val password = userPassword!!.text.toString()
         val confirmPassword = userConfirmPassword!!.text.toString()
 
+        // empty field checks
         if (TextUtils.isEmpty(email)) {
             Toast.makeText(applicationContext, "Please enter an email", Toast.LENGTH_SHORT).show()
             return
@@ -48,6 +49,7 @@ class SignUpActivity : AppCompatActivity() {
             return
         }
 
+        // if matching password fields, then create the account
         if (TextUtils.equals(password, confirmPassword)) {
             mAuth.createUserWithEmailAndPassword(email, password)
                 .addOnCompleteListener { task ->

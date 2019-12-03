@@ -33,6 +33,8 @@ class SearchActivity : AppCompatActivity() {
 
         val userInput = findViewById<View>(R.id.search_editText) as EditText
         userEntryList!!.clear()
+
+        // ListView setup
         mAdapter = SearchActivityAdapter(applicationContext)
         lstView = ListView(applicationContext)
         lstView!!.setFooterDividersEnabled(true)
@@ -53,15 +55,15 @@ class SearchActivity : AppCompatActivity() {
 
             val tagToSearch = userInput.text.toString()
 
+            // populate resultList with matching tags
             resultList!!.clear()
-
             for (entry in userEntryList!!) {
                 if (entry.getTags().contains(tagToSearch)) {
                     resultList!!.add(entry)
                 }
             }
 
-            // empty string case
+            // matching tags will be displayed on LinearLayout
             if (tagToSearch == "" || resultList!!.size == 0) {
                 setNoResults()
             } else {
@@ -70,7 +72,7 @@ class SearchActivity : AppCompatActivity() {
         }
     }
 
-    // updates userEntryList to contain
+    // updates userEntryList to contain matching tags
     private fun updateUserEntryList() {
         pointer.addValueEventListener(object : ValueEventListener {
             override fun onDataChange(dataSnapshot: DataSnapshot) {
@@ -87,6 +89,7 @@ class SearchActivity : AppCompatActivity() {
         })
     }
 
+    // update ListView to reflect no matching search results
     private fun setNoResults() {
         searchResults!!.removeAllViews()
         mAdapter!!.clearList()
@@ -96,6 +99,7 @@ class SearchActivity : AppCompatActivity() {
         searchResults!!.addView(noResultsView)
     }
 
+    // update ListView with resultList items
     private fun setResultsFound(resultList: ArrayList<JournalEntry>) {
         searchResults!!.removeAllViews()
         mAdapter!!.clearList()
@@ -103,20 +107,24 @@ class SearchActivity : AppCompatActivity() {
         searchResults!!.addView(lstView)
     }
 
+    // item was deleted in ViewEntryActivity, so update the ListView dependent data lists
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
 
+        // item was deleted in ViewEntryActivity
         if (resultCode == 2) {
             updateUserEntryList()
             val tagToSearch = findViewById<View>(R.id.search_editText) as EditText
-            resultList!!.clear()
 
+            // populate resultList with matching tags
+            resultList!!.clear()
             for (entry in userEntryList!!) {
                 if (entry.getTags().contains(tagToSearch.text.toString())) {
                     resultList!!.add(entry)
                 }
             }
 
+            // matching tags will be displayed on LinearLayout
             if (resultList!!.size > 0) {
                 setResultsFound(resultList!!)
             } else {

@@ -43,6 +43,7 @@ class LoginActivity : AppCompatActivity() {
         val email: String = viewEmail!!.text.toString()
         val password: String = viewPassword!!.text.toString()
 
+        // empty field checks
         if (TextUtils.isEmpty(email)) {
             Toast.makeText(applicationContext, "Please enter an email", Toast.LENGTH_SHORT).show()
             return
@@ -52,22 +53,16 @@ class LoginActivity : AppCompatActivity() {
             return
         }
 
+        // sign in if successful
         mAuth!!.signInWithEmailAndPassword(email, password).addOnCompleteListener {task ->
             if (task.isSuccessful) {
                 Toast.makeText(applicationContext, "Login successful!", Toast.LENGTH_SHORT).show()
 
                 val intent = Intent(applicationContext, HomeActivity::class.java)
-//                intent.putExtra(UserMail, email)
-//                intent.putExtra(UserID, mAuth!!.currentUser!!.uid)
                 startActivity(intent)
             } else {
                 Toast.makeText(applicationContext,"Login failed! Wrong email or password", Toast.LENGTH_SHORT).show()
             }
         }
     }
-
-//    companion object {
-//        const val UserMail = "com.example.tesla.myhomelibrary.UMail"
-//        const val UserID = "com.example.tesla.myhomelibrary.UID"
-//    }
 }

@@ -47,6 +47,7 @@ class SearchActivityAdapter(private val context: Context) : BaseAdapter() {
         holder.tags!!.text = "Tags: " + currEntry.getTags().joinToString(",")
         holder.entry!!.text = "Thoughts: " + currEntry.getEntry()
 
+        // color coding text to reflect mood
         val rating = Integer.parseInt(currEntry.getRating())
         when {
             rating >= 4 -> {

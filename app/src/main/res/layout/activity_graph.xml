@@ -7,44 +7,10 @@ android:layout_width="match_parent"
 android:layout_height="match_parent"
 tools:context=".GraphActivity">
 
-    <!--<ScrollView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        tools:layout_editor_absoluteX="16dp"
-        tools:layout_editor_absoluteY="126dp">
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical">
-
-            &lt;!&ndash; https://github.com/jjoe64/GraphView &ndash;&gt;
-            &lt;!&ndash; TODO: possibly change this to something better &ndash;&gt;
-
-            &lt;!&ndash; https://github.com/alhazmy13/AndroidWordCloud &ndash;&gt;
-            &lt;!&ndash; TODO: possibly change this to something better &ndash;&gt;
-            <lecho.lib.hellocharts.view.LineChartView
-                android:id="@+id/chart"
-                android:layout_width="match_parent"
-                android:layout_height="500dp"
-                tools:ignore="MissingPrefix" />
-
-            &lt;!&ndash;        <net.alhazmy13.wordcloud.WordCloudView&ndash;&gt;
-            &lt;!&ndash;            android:id="@+id/wordCloud"&ndash;&gt;
-            &lt;!&ndash;            android:layout_width="wrap_content"&ndash;&gt;
-            &lt;!&ndash;            android:layout_height="wrap_content" />&ndash;&gt;
-        </LinearLayout>
-    </ScrollView>-->
     <lecho.lib.hellocharts.view.LineChartView
         android:id="@+id/chart"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         tools:ignore="MissingPrefix" />
-    <!--<ProgressBar
-        android:id="@+id/login_progress"
-        style="?android:attr/progressBarStyleLarge"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:visibility="gone" />-->
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Journal Daily</string>
+    <string name="app_name">Feelings Diary</string>
 
     <!-- Strings related to login -->
     <string name="title_activity_login">Log in</string>

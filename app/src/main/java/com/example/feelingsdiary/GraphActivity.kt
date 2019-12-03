@@ -24,6 +24,7 @@ class GraphActivity : AppCompatActivity() {
     private val fire = FirebaseDatabase.getInstance().reference
     private val currUser = fire.child(FirebaseAuth.getInstance().currentUser!!.uid)
     private var userRatingList: ArrayList<Double>? = arrayListOf()
+    private val allAverages = ArrayList<Double>()
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_graph)
@@ -41,7 +42,7 @@ class GraphActivity : AppCompatActivity() {
 
         //val yAxisData = doubleArrayOf()
         //val axisValues = ArrayList<AxisValue>()
-        val allAverages = ArrayList<Double>()
+        allAverages.clear()
         var formatter = SimpleDateFormat("MM-dd-yy")
         var calendar = Calendar.getInstance()
         var day = calendar.get(Calendar.DAY_OF_WEEK)
@@ -97,6 +98,14 @@ class GraphActivity : AppCompatActivity() {
                 //impossible
             }
         }
+        /*val gooseArr: ArrayList<String> = arrayListOf("5436534634")
+        val journalEntry = JournalEntry(
+            "gooseEgg",
+            "gooseEgg",
+            "gooseEgg",
+            gooseArr,
+            "gooseEgg"
+        )*/
         Log.i("GraphActivity", startDate.toString())
         currUser.addValueEventListener(object : ValueEventListener {
             override fun onDataChange(dataSnapshot: DataSnapshot) {
@@ -136,11 +145,12 @@ class GraphActivity : AppCompatActivity() {
                         if(userRatingList!!.size != 0) {
                             total = sum / (userRatingList!!.size)
                             Log.i("The average is", total.toString())
+                            allAverages.add(total)
                         }
                         else{
                             total = 0.0
+                            allAverages.add(total)
                         }
-                        allAverages.add(total)
                         Log.i("Average added for entries from", startDate.toString())
 
                     }
@@ -151,9 +161,9 @@ class GraphActivity : AppCompatActivity() {
                     }
                 }
             }
-            override fun onCancelled(databaseError: DatabaseError) {}
+            override fun onCancelled(databaseError: DatabaseError) {Log.i("GraphActivity", "onCancelled")}
         })
-        Log.i("GraphActivity", "Free from the loop!")
+        Log.i("After free", "Free from the loop!")
         /*while (startDate.isBefore(today) || startDate.isEqual(today)) {
             Log.i("GraphActivity", "Whileloop Day")
             Log.i("GraphActivity", startDate.toString())
@@ -204,20 +214,18 @@ class GraphActivity : AppCompatActivity() {
             startDate = startDate.plusDays(1)
             Log.i("The day is now", startDate.toString())
         }*/
-        val tempAxis = arrayOfNulls<Double>(userRatingList!!.size)
-        val yAxisData = userRatingList!!.toArray(tempAxis)
-        if(userRatingList == null){
+        Log.i("After free", "Nothing weird happening")
+
+        //val tempAxis = arrayOfNulls<Double>(allAverages!!.size)
+        //val yAxisData = allAverages!!.toArray(tempAxis)
+        /*if(userRatingList == null){
             Log.i("GraphActivity", "That jont null")
+        }*/
+        Log.i("allAverages", allAverages.size.toString())
+        for(j in 0 .. allAverages!!.size - 1){
+            Log.i("allAverages", allAverages.get(j).toString())
         }
-        for(j in userRatingList!!){
-            if(j == null){
-                Log.i("GraphActivity", "Value is null")
-            }
-            else {
-                Log.i("GraphActivity", j.toString())
-            }
-        }
-        //val yAxisData = doubleArrayOf(3.0, 2.0, 5.0)
+        //val yAxisData = doubleArrayOf(3.6666666666666666666, 2.0, 5.0, 1.0, 3.0, 3.0, 2.0)
         val yAxisValues = ArrayList<PointValue>()
         val axisValues = ArrayList<AxisValue>()
         val line = Line(yAxisValues)
@@ -225,9 +233,12 @@ class GraphActivity : AppCompatActivity() {
             axisValues.add(i, AxisValue(i.toFloat()).setLabel(axisData[i]))
         }
 
-        for (i in 0 until yAxisData.size) {
-            yAxisValues.add(PointValue(i.toFloat(), yAxisData[i]!!.toFloat()))
+        for (i in 0 until allAverages.size) {
+            yAxisValues.add(PointValue(i.toFloat(), allAverages!!.get(i).toFloat()))
         }
+        /*for (i in 0 until yAxisData.size) {
+            yAxisValues.add(PointValue(i.toFloat(), yAxisData[i]!!.toFloat()))
+        }*/
         val lines = ArrayList<Line>()
         lines.add(line)
         val data = LineChartData()
